@@ -4,7 +4,7 @@
 	<author>Marcus Povey</author>
 	<version>1.0</version>
 	<category>enhancements</category>
-	<description>Provides detailed performance logging for Elgg via a StatsD server.</description>
+	<description>Provides detailed performance logging and profiling for Elgg via a StatsD server.</description>
 	<website>https://github.com/mapkyca/elgg-statsd</website>
 	<copyright>Marcus Povey 2012</copyright>
 	<license>GNU General Public License version 2</license>
