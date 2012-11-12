@@ -74,7 +74,7 @@
                 $subtype = ".$subtype";
             }
             
-            $__STATSD_COUNTERS["{$CONFIG->statsd_bucket}.events.$event.$type{$subtype}"]++;
+            $__STATSD_COUNTERS["{$CONFIG->statsd_bucket}.events.$type.$event{$subtype}"]++;
             //ElggStatsD::increment("{$CONFIG->statsd_bucket}.events.$type.$entity_type{$subtype}");
             
         }
