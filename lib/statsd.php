@@ -120,9 +120,11 @@ class ElggStatsD {
         try {
             $host = $config->getConfig("statsd.host");
             $port = $config->getConfig("statsd.port");
+            
             $fp = fsockopen("udp://$host", $port, $errno, $errstr);
-            if (! $fp) { return; }
+            if (! $fp) {  return; }
             foreach ($sampledData as $stat => $value) {
+                
                 fwrite($fp, "$stat:$value");
             }
             fclose($fp);
@@ -153,20 +155,14 @@ class ElggStatsDConfig
 
     public function isEnabled($section)
     {
-        return isset($this->_data[$section]);
+        return elgg_get_plugin_setting('pluginenabled', 'elgg-statsd') == 'yes';
     }
 
     public function getConfig($name)
     {
-        $name_array = explode('.', $name, 2);
+        if (!isset($this->_data[$name])) return;
 
-        if (count($name_array) < 2) return;
-
-        list($section, $param) = $name_array;
-
-        if (!isset($this->_data[$section][$param])) return;
-
-        return $this->_data[$section][$param];
+        return $this->_data[$name];
     }
 }
 
