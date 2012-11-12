@@ -114,8 +114,10 @@
         
         function statsd_php_exception_handler($exception) {
             
+            global $CONFIG;
+            
             if (elgg_get_plugin_setting('log_exceptions', 'elgg-statsd')!='no') 
-            {
+            { 
                 ElggStatsD::increment("{$CONFIG->statsd_bucket}.exceptions");
                 ElggStatsD::increment("{$CONFIG->statsd_bucket}.exceptions.".get_class($exception));
             }
