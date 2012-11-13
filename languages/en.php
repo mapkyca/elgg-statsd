@@ -8,6 +8,7 @@
             'elgg-statsd:port' => 'StatsD Port',
             'elgg-statsd:log_exceptions' => 'Log Exceptions',
             'elgg-statsd:log_errors' => 'Log PHP Errors',
+            'elgg-statsd:log_messages' => 'Log User Popup Messages (warnings and errors)',
             'elgg-statsd:log_warnings' => 'Log PHP Warnings',
             'elgg-statsd:log_notices' => 'Log PHP Notices',
             'elgg-statsd:log_events' => 'Log Elgg Events',

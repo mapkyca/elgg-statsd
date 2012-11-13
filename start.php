@@ -48,9 +48,20 @@
                 set_error_handler('statsd_php_error_handler');
                 set_exception_handler('statsd_php_exception_handler');
                
-                
                 // Shutdown hook
                 register_shutdown_function('statsd_shutdown');
+                
+                // Register any error messages
+                if (elgg_get_plugin_setting('log_messages', 'elgg-statsd')!='no')
+                {
+                    if (($_SESSION['msg']) && (is_array($_SESSION['msg']))) {
+                        foreach ($_SESSION['msg'] as $register => $messages)
+                        {
+                            if (is_array($messages)) 
+                                ElggStatsD::updateStats("{$CONFIG->statsd_bucket}.messages.$register", count($messages));
+                        }
+                    }
+                }
             }
 	}
 	
