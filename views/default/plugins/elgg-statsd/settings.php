@@ -16,6 +16,8 @@
         $log_warnings = $vars['entity']->log_warnings; if (!$log_warnings) $log_warnings = 'no';
         $log_notices = $vars['entity']->log_notices; if (!$log_notices) $log_notices = 'no';
         
+        $log_time = $vars['entity']->log_time; if (!$log_time) $log_time = 'yes';
+        
 ?>
 <div class="section basic">
     
@@ -39,7 +41,7 @@
 
 
 
-<div class="section errors">
+<div class="section elgg">
     <p><?php echo elgg_echo('elgg-statsd:log_events'); ?>:
         <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_events]', 'value' => $log_events, 'options_values' => array(
             'yes' => elgg_echo('option:yes'),
@@ -55,7 +57,15 @@
     </p>
 </div>
 
-<div class="section errors">
+<div class="section php">
+    
+    <p><?php echo elgg_echo('elgg-statsd:log_time'); ?>:
+        <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_time]', 'value' => $log_time, 'options_values' => array(
+            'yes' => elgg_echo('option:yes'),
+            'no' => elgg_echo('option:no'),
+        ))); ?>
+    </p>
+    
     <p><?php echo elgg_echo('elgg-statsd:log_exceptions'); ?>:
         <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_exceptions]', 'value' => $log_exceptions, 'options_values' => array(
             'yes' => elgg_echo('option:yes'),

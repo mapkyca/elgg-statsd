@@ -142,8 +142,8 @@
             }
             
             // Now log time script execution took
-            $now = microtime(true);
-            ElggStatsD::timing("{$CONFIG->statsd_bucket}.executiontime", ($now - $START_MICROTIME) * 1000);
+            if (elgg_get_plugin_setting('log_time', 'elgg-statsd')!='no')
+                ElggStatsD::timing("{$CONFIG->statsd_bucket}.executiontime", (microtime(true) - $START_MICROTIME) * 1000);
         }
         
         function statsd_increment($stat) 

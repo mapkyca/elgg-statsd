@@ -12,6 +12,7 @@
             'elgg-statsd:log_notices' => 'Log PHP Notices',
             'elgg-statsd:log_events' => 'Log Elgg Events',
             'elgg-statsd:log_hooks' => 'Log Elgg Hooks',
+            'elgg-statsd:log_time' => 'Log Script Execution Times',
 	);
 					
 	add_translation("en",$english);
