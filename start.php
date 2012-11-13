@@ -118,8 +118,8 @@
             
             if (elgg_get_plugin_setting('log_exceptions', 'elgg-statsd')!='no') 
             { 
-                ElggStatsD::increment("{$CONFIG->statsd_bucket}.exceptions");
-                ElggStatsD::increment("{$CONFIG->statsd_bucket}.exceptions.".get_class($exception));
+                statsd_increment("exceptions");
+                statsd_increment("exceptions.".get_class($exception));
             }
             
             // Bounce to elgg handler
@@ -144,6 +144,13 @@
             // Now log time script execution took
             $now = microtime(true);
             ElggStatsD::timing("{$CONFIG->statsd_bucket}.executiontime", ($now - $START_MICROTIME) * 1000);
+        }
+        
+        function statsd_increment($stat) 
+        {
+            global $CONFIG;
+            
+            return ElggStatsD::increment("{$CONFIG->statsd_bucket}.$stat");  
         }
         
 	elgg_register_event_handler('init','system','statsd_init');
