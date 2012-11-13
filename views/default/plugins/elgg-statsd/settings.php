@@ -11,6 +11,7 @@
         $log_hooks = $vars['entity']->log_hooks; if (!$log_hooks) $log_hooks = 'yes';
         $log_events = $vars['entity']->log_events; if (!$log_events) $log_events = 'yes';
         $log_messages = $vars['entity']->log_messages; if (!$log_messages) $log_messages = 'yes';
+        $log_database = $vars['entity']->log_database; if (!$log_database) $log_database = 'yes';
         
         $log_exceptions = $vars['entity']->log_exceptions; if (!$log_exceptions) $log_exceptions = 'yes';
         $log_errors = $vars['entity']->log_errors; if (!$log_errors) $log_errors = 'yes';
@@ -59,6 +60,13 @@
     
     <p><?php echo elgg_echo('elgg-statsd:log_messages'); ?>:
         <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_messages]', 'value' => $log_messages, 'options_values' => array(
+            'yes' => elgg_echo('option:yes'),
+            'no' => elgg_echo('option:no'),
+        ))); ?>
+    </p>
+    
+    <p><?php echo elgg_echo('elgg-statsd:log_database'); ?>:
+        <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_database]', 'value' => $log_database, 'options_values' => array(
             'yes' => elgg_echo('option:yes'),
             'no' => elgg_echo('option:no'),
         ))); ?>

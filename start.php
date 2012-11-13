@@ -142,7 +142,7 @@
          */
         function statsd_shutdown()
         {
-            global $CONFIG, $__STATSD_COUNTERS, $START_MICROTIME;;
+            global $CONFIG, $__STATSD_COUNTERS, $START_MICROTIME, $dbcalls;
             
             foreach ($__STATSD_COUNTERS as $key => $count) {
                 
@@ -151,6 +151,10 @@
                 
                 ElggStatsD::updateStats($key, $count);
             }
+            
+            // Log database calls
+            if (elgg_get_plugin_setting('log_database', 'elgg-statsd')!='no')
+                ElggStatsD::updateStats("{$CONFIG->statsd_bucket}.dbcalls", $dbcalls);    
             
             // Now log time script execution took
             if (elgg_get_plugin_setting('log_time', 'elgg-statsd')!='no')
