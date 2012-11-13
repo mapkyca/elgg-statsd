@@ -131,7 +131,7 @@
          */
         function statsd_shutdown()
         {
-            global $CONFIG, $__STATSD_COUNTERS;
+            global $CONFIG, $__STATSD_COUNTERS, $START_MICROTIME;;
             
             foreach ($__STATSD_COUNTERS as $key => $count) {
                 
@@ -140,6 +140,10 @@
                 
                 ElggStatsD::updateStats($key, $count);
             }
+            
+            // Now log time script execution took
+            $now = microtime(true);
+            ElggStatsD::timing("{$CONFIG->statsd_bucket}.executiontime", ($now - $START_MICROTIME) * 1000);
         }
         
 	elgg_register_event_handler('init','system','statsd_init');
