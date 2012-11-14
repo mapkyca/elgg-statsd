@@ -62,6 +62,18 @@
                         }
                     }
                 }
+                
+                // Track logged in users
+                if ((elgg_is_logged_in()) && (elgg_get_plugin_setting('log_users', 'elgg-statsd')!='no'))
+                {
+                    statsd_set('users.loggedin', elgg_get_logged_in_user_guid());
+                }
+                
+                // Tracked out logged out sessions
+                if ((!elgg_is_logged_in()) && (elgg_get_plugin_setting('log_loggedoutusers', 'elgg-statsd')!='no'))
+                {
+                    statsd_set('users.loggedout_sessions', hexdec(session_id()));
+                }
             }
 	}
 	
@@ -212,6 +224,19 @@
         {
             global $CONFIG;
             return ElggStatsD::updateStats("{$CONFIG->statsd_bucket}.$stat", $delta);
+        }
+        
+        /**
+         * Set a unique counter.
+         * @global type $CONFIG
+         * @param type $stat
+         * @param type $value
+         * @return type 
+         */
+        function statsd_set($stat, $value)
+        {
+            global $CONFIG;
+            return ElggStatsD::set("{$CONFIG->statsd_bucket}.$stat", $value);  die("called $value");
         }
         
 	elgg_register_event_handler('init','system','statsd_init');

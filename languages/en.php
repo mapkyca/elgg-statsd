@@ -15,6 +15,8 @@
             'elgg-statsd:log_hooks' => 'Log Elgg Hooks',
             'elgg-statsd:log_time' => 'Log Script Execution Times',
             'elgg-statsd:log_database' => 'Log Database Calls',
+            'elgg-statsd:log_users' => 'Track Users',
+            'elgg-statsd:log_loggedoutusers' => 'Track Loggedout Sessions',
 	);
 					
 	add_translation("en",$english);

@@ -8,6 +8,9 @@
         $bucket = $vars['entity']->bucket;
         if (!$bucket) $bucket = $CONFIG->statsd_bucket;
         
+        $log_users = $vars['entity']->log_users; if (!$log_users) $log_users = 'yes';
+        $log_loggedoutusers = $vars['entity']->log_loggedoutusers; if (!$log_loggedoutusers) $log_loggedoutusers = 'yes';
+        
         $log_hooks = $vars['entity']->log_hooks; if (!$log_hooks) $log_hooks = 'yes';
         $log_events = $vars['entity']->log_events; if (!$log_events) $log_events = 'yes';
         $log_messages = $vars['entity']->log_messages; if (!$log_messages) $log_messages = 'yes';
@@ -41,6 +44,21 @@
     </p>
 </div>
 
+<div class="section users">
+    <p><?php echo elgg_echo('elgg-statsd:log_users'); ?>:
+        <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_users]', 'value' => $log_users, 'options_values' => array(
+            'yes' => elgg_echo('option:yes'),
+            'no' => elgg_echo('option:no'),
+        ))); ?>
+    </p>
+
+    <p><?php echo elgg_echo('elgg-statsd:log_loggedoutusers'); ?>:
+        <?php echo elgg_view('input/dropdown', array('internalname' => 'params[log_loggedoutusers]', 'value' => $log_loggedoutusers, 'options_values' => array(
+            'yes' => elgg_echo('option:yes'),
+            'no' => elgg_echo('option:no'),
+        ))); ?>
+    </p>
+</div>
 
 
 <div class="section elgg">
