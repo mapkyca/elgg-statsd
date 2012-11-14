@@ -22,11 +22,11 @@
             if (!$CONFIG->statsd_bucket)
                 $CONFIG->statsd_bucket = elgg_get_plugin_setting('bucket', 'elgg-statsd');
             if (!$CONFIG->statsd_bucket) {
-                $CONFIG->statsd_bucket = strtolower(preg_replace("/[^a-zA-Z0-9\s]/", "", elgg_get_site_entity()->name));
+                $CONFIG->statsd_bucket = elgg_get_site_entity()->name;
             }
             
             // Sanitise bucket
-            $CONFIG->statsd_bucket = trim($CONFIG->statsd_bucket, ' .,');
+            $CONFIG->statsd_bucket = strtolower(preg_replace("/[^a-zA-Z0-9\s]/", "", $CONFIG->statsd_bucket));
             
             if (
                     (elgg_get_plugin_setting('pluginenabled', 'elgg-statsd') == 'yes') && 
