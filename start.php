@@ -158,14 +158,60 @@
             
             // Now log time script execution took
             if (elgg_get_plugin_setting('log_time', 'elgg-statsd')!='no')
-                ElggStatsD::timing("{$CONFIG->statsd_bucket}.executiontime", (microtime(true) - $START_MICROTIME) * 1000);
+                statsd_timing("executiontime", (microtime(true) - $START_MICROTIME) * 1000);
         }
         
+        /**
+         * Increment counter.
+         * You can call this from your own programs.
+         * @global type $CONFIG
+         * @param type $stat
+         * @return type 
+         */
         function statsd_increment($stat) 
         {
             global $CONFIG;
             
             return ElggStatsD::increment("{$CONFIG->statsd_bucket}.$stat");  
+        }
+        
+        /**
+         * Decrement counter.
+         * You can call this from your own programs.
+         * @global type $CONFIG
+         * @param type $stat
+         * @return type 
+         */
+        function statsd_decrement($stat) 
+        {
+            global $CONFIG;
+            return ElggStatsD::decrement("{$CONFIG->statsd_bucket}.$stat");  
+        }
+        
+        /**
+         * Set a timer.
+         * @global type $CONFIG
+         * @param type $stat
+         * @param type $time
+         * @return type 
+         */
+        function statsd_timing($stat, $time)
+        {
+            global $CONFIG;
+            return ElggStatsD::timing("{$CONFIG->statsd_bucket}.$stat", $time);
+        }
+        
+        /**
+         * Set a stat, useful for block updates.
+         * @global type $CONFIG
+         * @param type $stat
+         * @param type $delta
+         * @return type 
+         */
+        function statsd_update($stat, $delta)
+        {
+            global $CONFIG;
+            return ElggStatsD::updateStats("{$CONFIG->statsd_bucket}.$stat", $delta);
         }
         
 	elgg_register_event_handler('init','system','statsd_init');
