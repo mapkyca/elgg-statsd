@@ -72,7 +72,7 @@
                 // Tracked out logged out sessions
                 if ((!elgg_is_logged_in()) && (elgg_get_plugin_setting('log_loggedoutusers', 'elgg-statsd')!='no'))
                 {
-                    statsd_set('users.loggedout_sessions', hexdec(session_id()));
+                    statsd_set('users.loggedout_sessions', session_id());
                 }
             }
 	}
