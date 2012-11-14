@@ -27,7 +27,7 @@ If all the backend and infrastructure stuff has been set up correctly you should
 
 See
 ---
- * Author: Marcus Povey <http://www.marcus-povey.co.uk>
+ * Author: Marcus Povey <http://www.marcus-povey.co.uk> (specifically this blog post: http://www.marcus-povey.co.uk/2012/11/19/profiling-elgg-site-performance-with-statsd-and-node-js/)
  * Node.JS <https://github.com/joyent/node>
  * StatsD <https://github.com/etsy/statsd>
  * Graphite Graphing Server <http://graphite.wikidot.com/start>
